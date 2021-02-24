@@ -1,0 +1,21 @@
+<header>
+  <div class="container">
+    <a routerLink="/">{{LOGO}}</a>
+    <nav>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li *ngIf="show" (click)="sayHi()"><a routerLink="/EditForm">FormBuilder</a></li>
+        <li><a routerLink="/Render">FormRender</a></li>
+        <li *ngIf="show" ><a routerLink="/Management">Manage</a></li>
+        <!--
+        <div *ngIf="show">
+          <input [(ngModel)]="user">
+          <input [(ngModel)]="pw">
+          <label (click)="login()" >login</label>
+        </div>
+        <li *ngIf="!show" (click)="logout()"><a style="color: white; cursor: pointer">Logout</a></li>
+        -->
+      </ul>
+    </nav>
+  </div>
+</header>

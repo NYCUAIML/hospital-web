@@ -1,0 +1,16 @@
+.align > ::ng-deep figure{
+    padding-top: 38px;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+}
+
+.form_align > ::ng-deep figure{
+    padding-top: 30px;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+}
+
+.text_align > ::ng-deep figure{
+    padding-top: 3em;
+    display: inline-block; 
+}

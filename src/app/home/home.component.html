@@ -1,0 +1,17 @@
+<p>home works!</p>
+<p>Customize your form by drag and drop below fields to the form area.</p>
+   
+<div *ngIf="show">
+  <form class="login-form" (ngSubmit)="login()">
+    <mat-form-field class="login-full-width">
+      <input [(ngModel)]='user' name="user" matInput placeholder="Account">
+    </mat-form-field>
+    <mat-form-field class="login-full-width">
+      <input [(ngModel)]='pw'  name="pw" matInput placeholder="Password">
+    </mat-form-field>
+    <button type="submit" mat-button>Login</button>
+  </form>
+</div>
+<div *ngIf="!show">
+  <button (click)="logout()" mat-button>Logout</button>
+</div>

@@ -1,0 +1,261 @@
+<mat-grid-list cols="4" gutterSize="5px">
+  <mat-grid-tile  style="background: skyblue;" class="align">
+    <mat-grid-tile-header>
+        病人基本資料
+    </mat-grid-tile-header>
+
+    <mat-list class="align">
+      <mat-list-item>
+        病歷號碼：
+      </mat-list-item>
+      <mat-list-item>
+        姓名：
+      </mat-list-item>
+      <mat-list-item>
+        生日：
+      </mat-list-item>
+      <mat-list-item>
+        問診日期：
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+  <mat-grid-tile style="background: skyblue" class="align">
+    <mat-grid-tile-header>
+      病人基本資料
+    </mat-grid-tile-header>
+    <mat-list>
+      <mat-list-item>
+        性別：
+      </mat-list-item>
+      <mat-list-item>
+        現在疾病：
+      </mat-list-item>
+      <mat-list-item>
+        過去病史：
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+  <mat-grid-tile style="background: skyblue" class="align">
+    <mat-grid-tile-header>
+      病人基本資料
+    </mat-grid-tile-header>
+    <mat-list>
+      <mat-list-item>
+        體檢結果：
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+  <mat-grid-tile style="background: grey" class="align" rowspan="5">
+    <mat-grid-tile-header>
+      病歷選單
+    </mat-grid-tile-header>  
+    <mat-nav-list >
+      <mat-list-item *ngFor="let form of model1" (click)="check(form.formname)">
+        {{form.formname}}
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-grid-tile>
+  <mat-grid-tile style="background: powderblue; overflow-y:auto" colspan="3" rowspan="3" class="form_align">
+    <div style="max-width:500px;">
+        <form class="ftheme" >
+        <div>
+          <div *ngFor="let item of model.attributes" class="form-group" style="margin-left: 3em;">
+            <div *ngIf="item.type=='text'">
+              <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+              <input type="text" class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" [(ngModel)]="item.value" [required]="item.required" [ngModelOptions]="{standalone: true}" autocomplete="off">
+            </div>
+            <div *ngIf="item.type=='email'">
+              <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+              <input type="email" class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
+            </div>
+            <div *ngIf="item.type=='phone'">
+              <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+              <input type="email" class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
+            </div>
+            <div *ngIf="item.type=='number'">
+                <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+                <input type="number" class="form-control" id="{{item.name}}" min="{{item.min}}" max="{{item.max}}" placeholder="{{item.placeholder}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
+              </div>
+            <div *ngIf="item.type=='date'">
+              <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+              <input type="date" class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
+            </div>
+            <div *ngIf="item.type=='datetime-local'">
+              <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+              <input type="datetime-local" class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
+            </div>
+            <div *ngIf="item.type=='textarea'">
+                <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+                <textarea class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
+                </textarea>
+            </div>
+            <div *ngIf="item.type=='file'">
+              <label>{{item.label}} (File can't be uploaded right now)</label> <label *ngIf="item.required" class="text-danger">*</label>
+              <input type="file" class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}" autocomplete="off">
+              <small class="form-text text-danger">(File can't be uploaded right now)</small>
+            </div>
+            <div *ngIf="item.type=='paragraph'">
+              <p class="form-text">{{item.placeholder}}</p>
+            </div>
+            <div *ngIf="item.type=='autocomplete'">
+              <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+              <select class="form-control" id="{{item.name}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</option>  
+              </select>
+              <!-- <small class="form-text text-muted">{{item.description}}</small> -->
+            </div>
+            <div *ngIf="item.type=='checkbox'">
+              <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+              <div *ngFor="let v of item.values" class="inline-form-group">
+                <div *ngIf="v.type=='checkbox'">
+                  <label class="cust-check-bx">
+                    <input type="checkbox" [value]="v.value" name="{{item.name}}" (click)="toggleValue(v)"> {{v.label}}
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div *ngIf="v.type=='textarea'">
+                  <label>{{v.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+                  <textarea class="form-control" id="{{item.name}}" placeholder="{{item.placeholder}}" [(ngModel)] = "v.value" [ngModelOptions]="{standalone: true}"> 
+                  </textarea>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="item.type=='radio'">
+                <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+                <div *ngFor="let v of item.values" class="inline-form-group">
+                    <label class="cust-check-bx">
+                      <input type="radio" [value]="v.value" name="{{item.name}}" [(ngModel)]="item.value" [ngModelOptions]="{standalone: true}"> {{v.label}}
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+              </div>
+            <div *ngIf="item.type=='button'" class="btn-cont">
+              <input type="{{item.subtype}}" (click)="submit()" value="{{item.label}}" class="btn btn-primary" id="{{item.name}}" >
+            </div>
+          </div>
+        </div>
+        </form>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile style="background: paleturquoise" colspan="3" rowspan="1" class="text_align">
+    <mat-grid-tile-header>
+      文字產生區
+    </mat-grid-tile-header>
+    <!-- Generate Text -->
+    <span *ngFor="let item of text_generate" class="text_align">
+        <span *ngIf="item.label == 'Chief Complaint'">
+          The Chief Complaint of the pantient including
+          <span *ngFor="let v of item.values" style="text-decoration: underline">
+            <span *ngIf="v.selected == true">
+              <b>{{v.label}} /</b>  
+            </span>
+            <span *ngIf="v.type == 'textarea'">
+              <b>{{v.value}}</b>  
+            </span>
+          </span>. 
+        </span>
+        <span *ngIf="item.label == 'Physical Examination'">
+          The Physical Examination of the pantient including
+          <span *ngFor="let v of item.values" style="text-decoration: underline">
+            <span *ngIf="v.selected == true">
+              <b>{{v.label}} /</b>  
+            </span>
+            <span *ngIf="v.type == 'textarea'">
+              <b>{{v.value}}</b>  
+            </span>
+          </span>. 
+        </span>
+        <span *ngIf="item.label == 'Systemic Review'">
+          The Systemic Review of the pantient including
+          <span *ngFor="let v of item.values" style="text-decoration: underline">
+            <span *ngIf="v.selected == true">
+              <b>{{v.label}} /</b>  
+            </span>
+            <span *ngIf="v.type == 'textarea'">
+              <b>{{v.value}}</b>  
+            </span>
+          </span>.
+        </span>
+        <span *ngIf="item.label == 'Past History'">
+          The Past History of the pantient including
+          <span *ngFor="let v of item.values" style="text-decoration: underline">
+            <span *ngIf="v.selected == true">
+              <b>{{v.label}} /</b>  
+            </span>
+            <span *ngIf="v.type == 'textarea'">
+              <b>{{v.value}}</b>  
+            </span>
+          </span>.
+        </span>
+        <span *ngIf="item.label == 'Physical Exam'">
+          The Physical Exam of the pantient including
+          <span *ngFor="let v of item.values" style="text-decoration: underline">
+            <span *ngIf="v.selected == true">
+              <b>{{v.label}} /</b>  
+            </span>
+            <span *ngIf="v.type == 'textarea'">
+              <b>{{v.value}}</b>  
+            </span>
+          </span>
+        </span>
+        <span *ngIf="item.label == 'Not Done'">
+          The pantient 
+          <span *ngFor="let v of item.values" style="text-decoration: underline">
+            <span *ngIf="v.selected == true">
+              <b>{{v.label}} /</b> 
+            </span>
+            <span *ngIf="v.type == 'textarea'">
+              <b>{{v.value}}</b>  
+            </span>
+          </span>
+          is not done yet.
+        </span>
+        <span *ngIf="item.label == 'Allergy'">
+          The Allergy of the pantient including
+          <span *ngFor="let v of item.values" style="text-decoration: underline">
+            <span *ngIf="v.type == 'checkbox' && v.selected == true">
+              <b>{{v.label}} / </b>  
+            </span>
+            <span *ngIf="v.type == 'textarea'">
+              <b>{{v.value}}</b>  
+            </span>
+          </span>
+        </span>
+        <span *ngIf="item.label == 'First symptom' && item.type == 'textarea'">
+            The patient had been in [his/her] usual state of health until
+            <span style="text-decoration: underline">
+                <b>{{item.value}}</b>  
+            </span>
+            noted _____ ago.
+        </span>
+        <span *ngIf="item.label == 'Chief complaint' && item.type == 'textarea'">
+            The patient had been visited our OPD for
+            <span style="text-decoration: underline">
+                <b>{{item.value}}</b>  
+            </span>
+            .
+        </span>
+        <span *ngIf="item.label == 'Tumor characteriatic'">
+            DRE revealed a 
+            <span *ngFor="let v of item.values" style="text-decoration: underline">
+              <span *ngIf="v.label == 'Rectum tumor __cm from anal verge'">
+                <b>{{v.value}}</b>  
+              </span>
+            </span>
+            cm tumor from anal verge [VII-AV] cm. 
+        </span>
+        <span *ngIf="item.label == 'Special exams for staging'">
+            <span *ngFor="let v of item.values" style="text-decoration: underline">
+              <span *ngIf="v.type == 'checkbox' && v.selected == true">
+                <b>{{v.label}} / </b>  
+              </span>
+              <span *ngIf="v.type == 'textarea'">
+                <b>{{v.value}}</b>  
+              </span>
+            </span>
+            was performed. 
+        </span>
+    </span>
+    
+  </mat-grid-tile>
+</mat-grid-list>
